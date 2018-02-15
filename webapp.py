@@ -22,12 +22,16 @@ github = oauth.remote_app(
     base_url='https://api.github.com/',
     request_token_url=None,
     access_token_method='POST',
-    access_token_url='https://github.com/login/oauth/access_token',  
+    access_token_url='https://github.com/login/oauth/access_token',
     authorize_url='https://github.com/login/oauth/authorize' #URL for github's OAuth login
 )
 
 #use a JSON file to store the past posts.  A global list variable doesn't work when handling multiple requests coming in and being handled on different threads
 #Create and set a global variable for the name of you JSON file here.  The file will be created on Heroku, so you don't need to make it in GitHub
+filename='forum.json'
+with open('forum.json','r+') as f:
+    data=json.load(f)
+
 
 @app.context_processor
 def inject_logged_in():
@@ -39,14 +43,13 @@ def home():
 
 @app.route('/posted', methods=['POST'])
 def post():
-    #This function should add the new post to the JSON file of posts and then render home.html and display the posts.  
-    #Every post should include the username of the poster and text of the post. 
+    #This function should add the new post to the JSON file of posts and then render home.html and display the posts.
+    #Every post should include the username of the poster and text of the post.
 
 #redirect to GitHub's OAuth page and confirm callback URL
-#callback URL must match the pre-configured callback URL
 @app.route('/login')
-def login():   
-    return github.authorize(callback=url_for('authorized', _external=True, _scheme='https'))
+def login():
+    return github.authorize(callback=url_for('authorized', _external=True, _scheme='https')) #callback URL must match the pre-configured callback URL
 
 @app.route('/logout')
 def logout():
@@ -58,7 +61,7 @@ def authorized():
     resp = github.authorized_response()
     if resp is None:
         session.clear()
-        message = 'Access denied: reason=' + request.args['error'] + ' error=' + request.args['error_description'] + ' full=' + pprint.pformat(request.args)      
+        message = 'Access denied: reason=' + request.args['error'] + ' error=' + request.args['error_description'] + ' full=' + pprint.pformat(request.args)
     else:
         try:
             session['github_token'] = (resp['access_token'], '') #save the token to prove that the user logged in
