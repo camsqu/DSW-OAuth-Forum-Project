@@ -44,8 +44,9 @@ def inject_logged_in():
 def home():
     return render_template('home.html', past_posts=posts_to_html())
 
-#@app.route('/posted', methods=['POST'])
-#def post():
+@app.route('/posted', methods=['POST'])
+def post():
+    
     #This function should add the new post to the JSON file of posts and then render home.html and display the posts.
     #Every post should include the username of the poster and text of the post.
 
