@@ -43,9 +43,10 @@ def post():
     #Every post should include the username of the poster and text of the post. 
 
 #redirect to GitHub's OAuth page and confirm callback URL
+#callback URL must match the pre-configured callback URL
 @app.route('/login')
 def login():   
-    return github.authorize(callback=url_for('authorized', _external=True, _scheme='https')) #callback URL must match the pre-configured callback URL
+    return github.authorize(callback=url_for('authorized', _external=True, _scheme='https'))
 
 @app.route('/logout')
 def logout():
