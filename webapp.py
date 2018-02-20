@@ -41,6 +41,11 @@ def posts():
     return data
 
 def posts_to_html():
+    try:
+        with open(file,'r') as f:
+            data=json.load(f)
+    except Exception as e:
+        raise
     dat = user+''+userpost 
     return dat
 
