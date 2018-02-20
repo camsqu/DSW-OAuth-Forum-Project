@@ -46,6 +46,8 @@ def home():
 
 @app.route('/posted', methods=['POST'])
 def post():
+    with open(file,'r+') as f:
+        data=json.load(f)
     return render_template('home.html', past_posts='Test')
     
     #This function should add the new post to the JSON file of posts and then render home.html and display the posts.
