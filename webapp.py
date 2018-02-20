@@ -29,6 +29,8 @@ github = oauth.remote_app(
 #use a JSON file to store the past posts.  A global list variable doesn't work when handling multiple requests coming in and being handled on different threads
 #Create and set a global variable for the name of you JSON file here.  The file will be created on Heroku, so you don't need to make it in GitHub
 file="forum.json"
+user=''
+userpost=''
 
 def posts():
     try:
@@ -36,7 +38,11 @@ def posts():
             data=json.load(f)
     except Exception as e:
         raise
-    return data 
+    return data
+
+def posts_to_html():
+    dat = user+''+userpost 
+    return dat
 
 
 @app.context_processor
@@ -45,7 +51,7 @@ def inject_logged_in():
 
 @app.route('/')
 def home():
-    return render_template('home.html', past_posts='Test1')
+    return render_template('home.html', past_posts=posts_to_html())
 
 @app.route('/posted', methods=['POST'])
 def post():
