@@ -32,13 +32,6 @@ file="forum.json"
 user=''
 userpost=''
 
-def posts():
-    try:
-        with open(file,'r+') as f:
-            data=json.load(f)
-    except Exception as e:
-        raise
-    return data
 
 def posts_to_html():
     try:
@@ -60,7 +53,11 @@ def home():
 
 @app.route('/posted', methods=['POST'])
 def post():
-    posts()
+    try:
+        with open(file,'r+') as f:
+            data=json.load(f)
+    except Exception as e:
+        raise
     return render_template('home.html', past_posts='Test')
     
     #This function should add the new post to the JSON file of posts and then render home.html and display the posts.
