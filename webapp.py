@@ -40,12 +40,13 @@ def posts_to_html():
             data=json.load(f)
             table=Markup("<table>")
             for post in data:
-                tablerow=Markup("<tr>")+("<td>")+user+("</td>")+("<td>")+userpost+("</td>")+("</tr>")
-            endtable=Markup("</table>")
+                table=table+Markup("<tr>")+("<td>")+user+("</td>")+("<td>")+userpost+("</td>")+("</tr>")
+            table=table+Markup("</table>")
+            return table
     except Exception as e:
         raise
     dat = user+''+userpost 
-    return dat
+    return "Error Retrieving Posts"
 
 
 @app.context_processor
