@@ -40,7 +40,7 @@ def posts_to_html():
             data=json.load(f)
             table=Markup("<table>")
             for post in data:
-                table=table+Markup("<tr>")+("<td>")+user+("</td>")+("<td>")+userpost+("</td>")+("</tr>")
+                table=table+Markup("<tr>")+("<td>")+post[0]+("</td>")+("<td>")+post[1]+("</td>")+("</tr>")
             table=table+Markup("</table>")
             return table
     except Exception as e:
@@ -62,7 +62,7 @@ def post():
     try:
         with open(file,'r+') as f:
             data=json.load(f)
-            data.append(user+userpost)
+            data.append([user],[userpost])
             f.seek(0)
             f.truncate()
             json.dump(data,f)
