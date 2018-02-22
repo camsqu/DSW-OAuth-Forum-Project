@@ -38,9 +38,9 @@ def posts_to_html():
     try:
         with open(file,'r') as f:
             data=json.load(f)
-            table=markup("<table>")
+            table=Markup("<table>")
             for post in data:
-                tablerow=markup("<tr>")+("<td>")+user+("</td>")+("<td>")+userpost+("</td>")+("</tr>")
+                tablerow=Markup("<tr>")+("<td>")+user+("</td>")+("<td>")+userpost+("</td>")+("</tr>")
             endtable=markup("</table>")
     except Exception as e:
         raise
