@@ -38,6 +38,10 @@ def posts_to_html():
     try:
         with open(file,'r') as f:
             data=json.load(f)
+            table=markup("<table>")
+            for post in data:
+                table=table+tablerow=markup("<tr>")+user+userpost+("</tr>")
+            endtable=markup("</table>")
     except Exception as e:
         raise
     dat = user+''+userpost 
@@ -59,7 +63,7 @@ def post():
             data=json.load(f)
     except Exception as e:
         raise
-    return render_template('home.html', past_posts=posts_to_html())
+    return render_template('home.html', past_posts=posts_to_html())    
     
     #This function should add the new post to the JSON file of posts and then render home.html and display the posts.
     #Every post should include the username of the poster and text of the post.
