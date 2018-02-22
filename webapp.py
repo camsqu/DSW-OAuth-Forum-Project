@@ -40,7 +40,7 @@ def posts_to_html():
             data=json.load(f)
             table=markup("<table>")
             for post in data:
-                table=table+tablerow=markup("<tr>")+user+userpost+("</tr>")
+                table=table+tablerow=markup("<tr>")+("<td>")+user+("</td>")+("<td>")+userpost+("</td>")+("</tr>")
             endtable=markup("</table>")
     except Exception as e:
         raise
