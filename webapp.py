@@ -41,7 +41,7 @@ def posts_to_html():
             table=Markup("<table>")
             for post in data:
                 tablerow=Markup("<tr>")+("<td>")+user+("</td>")+("<td>")+userpost+("</td>")+("</tr>")
-            endtable=markup("</table>")
+            endtable=Markup("</table>")
     except Exception as e:
         raise
     dat = user+''+userpost 
