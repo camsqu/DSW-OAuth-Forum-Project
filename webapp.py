@@ -59,7 +59,7 @@ def post():
             data=json.load(f)
     except Exception as e:
         raise
-    return render_template('home.html', past_posts='Test')
+    return render_template('home.html', past_posts=posts_to_html())
     
     #This function should add the new post to the JSON file of posts and then render home.html and display the posts.
     #Every post should include the username of the poster and text of the post.
