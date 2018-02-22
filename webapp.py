@@ -62,7 +62,7 @@ def post():
     try:
         with open(file,'r+') as f:
             data=json.load(f)
-            data.append([user],[userpost])
+            data.append([user]+[userpost])
             f.seek(0)
             f.truncate()
             json.dump(data,f)
