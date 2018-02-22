@@ -62,6 +62,7 @@ def post():
     try:
         with open(file,'r+') as f:
             data=json.load(f)
+            file.append(user+userpost)
     except Exception as e:
         raise
     return render_template('home.html', past_posts=posts_to_html())    
