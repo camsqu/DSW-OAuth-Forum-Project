@@ -45,7 +45,7 @@ def posts_to_html():
         print(e)
         table = "<p>Post could not be submitted.</p>"
     table += '</table>'
-    Postt = Markup(post)
+    Postt = Markup(table)
     return Postt
 
 @app.context_processor
