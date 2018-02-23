@@ -35,19 +35,18 @@ userpost=''
 
 
 def posts_to_html():
+    table = "<table id='postTable'><tr><td><b>Username</b></td><td><b>Post</b></td></tr>"
     try:
-        with open(file,'r') as f:
-            data=json.load(f)
-            table=Markup("<table>")
+        with open(file,'r+') as f:
+            data = json.load(f)
             for post in data:
-                table=table+Markup("<tr>")+("<td>")+post[0]+("</td>")+("<td>")+post[1]+("</td>")+("</tr>")
-            table=table+Markup("</table>")
-            return table
+                table += '<tr>'+'<td>'+post[0]+'</td><td>'+post[1]+'</td></tr>'
     except Exception as e:
-        raise
-    dat = user+''+userpost 
-    return "Error Retrieving Posts"
-
+        print(e)
+        table = "<p>Post could not be submitted.</p>"
+    table += '</table>'
+    Postt = Markup(post)
+    return Postt
 
 @app.context_processor
 def inject_logged_in():
@@ -61,13 +60,13 @@ def home():
 def post():
     try:
         with open(file,'r+') as f:
-            data=json.load(f)
-            data.append([session['user_data']['login'],request.form["message"])
+            data = json.load(f)
+            data.append([session['user_data']['login'], request.form['message']])
             f.seek(0)
             f.truncate()
-            json.dump(data,f)
-    except Exception as e:
-        raise
+            f.dump(data,jsonFile)
+    except Exception as e: 
+        print(e)
     return render_template('home.html', past_posts=posts_to_html())    
     
     #This function should add the new post to the JSON file of posts and then render home.html and display the posts.
