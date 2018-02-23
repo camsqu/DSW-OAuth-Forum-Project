@@ -6,12 +6,15 @@
   <h1>Forum</h1>
   <p>Welcome to the forum, here are some ground rules.<br>If you try anything, you get hit with a magnificent banhammer.<br>Hacking or attempting to compromise our site will get you arrested.<br>No stale memes<br>Thank you, and enjoy the forum!</p>
 
-  
+  {% if logged_in %}
   <form action='/posted' method="post">
     <textarea name="message" style="width:100%; height:100px;"></textarea>
     <br>
     <input type="submit" value="Post">
-  </form>
+  </form><br>
+  {%else%}
+  <p>You must login!</p>
+  {% endif %}
 
   {{ past_posts }}
 
