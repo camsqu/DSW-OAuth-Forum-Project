@@ -46,7 +46,7 @@ def post():
 
 
 def posts_to_html():
-    table = "<table id='postTable'><tr><td><b>Username </b></td><td><b> Post</b></td></tr>"
+    table = "<table id='postTable'><tr><td><b>Username Post</b></td></tr>"
     try:
         with open(file,'r+') as f:
             data = json.load(f)
