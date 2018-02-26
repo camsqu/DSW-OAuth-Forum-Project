@@ -39,7 +39,7 @@ def post():
             data.append([session['user_data']['login'], request.form['message']])
             f.seek(0)
             f.truncate()
-            f.dump(data,f)
+            json.dump(data,f)
     except Exception as e: 
         print(e)
     return render_template('home.html', past_posts=posts_to_html())
