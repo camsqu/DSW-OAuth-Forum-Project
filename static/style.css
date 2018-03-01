@@ -6,6 +6,9 @@ h1{
  font-family: "Comic Sans MS", "Comic Sans", cursive;
 }
 
+#postTable {
+ border: 5px solid black;
+}
 
 #content {
      margin-left: 20px;
