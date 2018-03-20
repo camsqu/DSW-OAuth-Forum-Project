@@ -45,12 +45,10 @@ def post():
     collection = db['forum'] #put the name of your collection in the quote
     ##################################################################################################
     try:
-        with open(file,'r+') as f:
-            data = json.load(f)
-            data.append([session['user_data']['login'], request.form['message']])
-            f.seek(0)
-            f.truncate()
-            json.dump(data,f)
+        for i in data:
+            #
+            data = [{"_id" : i,  [session['user_data']['login']: request.form['message']}]
+            # DO WORK ABOVE.
     except Exception as e: 
         print(e)
     return render_template('home.html', past_posts=posts_to_html())
