@@ -22,9 +22,7 @@ def main():
         os.environ["MONGO_DBNAME"])
     client = pymongo.MongoClient(url)
     db = client[os.environ["MONGO_DBNAME"]]
-    collection = db['forum'] #put the name of your collection in the quotes
-    #1. print the number of documents in collection
-    print(collection.count())    
+    collection = db['forum'] #put the name of your collection in the quote
 
 
 #Set up GitHub as OAuth provider
@@ -60,6 +58,16 @@ def post():
 
 
 def posts_to_html():
+    url = 'mongodb://{}:{}@{}:{}/{}'.format(
+        os.environ["MONGO_USERNAME"],
+        os.environ["MONGO_PASSWORD"],
+        os.environ["MONGO_HOST"],
+        os.environ["MONGO_PORT"],
+        os.environ["MONGO_DBNAME"])
+    client = pymongo.MongoClient(url)
+    db = client[os.environ["MONGO_DBNAME"]]
+    collection = db['forum'] #put the name of your collection in the quotes
+    
     table = "<table id='postTable'><tr><b><td>Username </td><td>Post</td></b></tr>"
     try:
         with open(file,'r+') as f:
