@@ -13,21 +13,18 @@ app.debug = True #Change this to False for production
 app.secret_key = os.environ['SECRET_KEY'] #used to sign session cookies
 oauth = OAuth(app)
 
+url = 'mongodb://{}:{}@{}:{}/{}'.format(
+    os.environ["MONGO_USERNAME"],
+    os.environ["MONGO_PASSWORD"],
+    os.environ["MONGO_HOST"],
+    os.environ["MONGO_PORT"],
+    os.environ["MONGO_DBNAME"])
+client = pymongo.MongoClient(url)
+db = client[os.environ["MONGO_DBNAME"]]
+collection = db['forum'] #put the name of your collection in the quotes
+#1. print the number of documents in collection
+print(collection.count())    
 
-
-
-def main():
-    url = 'mongodb://{}:{}@{}:{}/{}'.format(
-            os.environ["MONGO_USERNAME"],
-            os.environ["MONGO_PASSWORD"],
-            os.environ["MONGO_HOST"],
-            os.environ["MONGO_PORT"],
-            os.environ["MONGO_DBNAME"])
-    client = pymongo.MongoClient(url)
-    db = client[os.environ["MONGO_DBNAME"]]
-    collection = db['forum'] #put the name of your collection in the quotes
-    #1. print the number of documents in collection
-    print(collection.count())    
 
 #Set up GitHub as OAuth provider
 github = oauth.remote_app(
