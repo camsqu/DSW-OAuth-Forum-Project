@@ -72,7 +72,7 @@ def posts_to_html():
         print(e)
         table = "<p>Post could not be submitted.</p>"
     table += '</table>'
-    Postt = Markup(table)
+    Postt = Markup(collection.count())
     return Postt
 
 
