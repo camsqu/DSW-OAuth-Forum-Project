@@ -34,6 +34,16 @@ os.system("echo '[]' >" + file)
 
 @app.route('/posted', methods=['POST'])
 def post():
+    url = 'mongodb://{}:{}@{}:{}/{}'.format(
+        os.environ["MONGO_USERNAME"],
+        os.environ["MONGO_PASSWORD"],
+        os.environ["MONGO_HOST"],
+        os.environ["MONGO_PORT"],
+        os.environ["MONGO_DBNAME"])
+    client = pymongo.MongoClient(url)
+    db = client[os.environ["MONGO_DBNAME"]]
+    collection = db['forum'] #put the name of your collection in the quote
+    ##################################################################################################
     try:
         with open(file,'r+') as f:
             data = json.load(f)
@@ -67,7 +77,7 @@ def posts_to_html():
         print(e)
         table = "<p>Post could not be submitted.</p>"
     table += '</table>'
-    Postt = Markup(collection.count())
+    Postt = Markup(table)
     return Postt
 
 
