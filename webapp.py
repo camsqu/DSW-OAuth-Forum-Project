@@ -63,10 +63,6 @@ def posts_to_html():
     posti = ""
     table = "<table id='postTable'><tr><b><td>Username </td><td>Post</td></b></tr>"
     try:
-        with open(file,'r+') as f:
-            data = json.load(f)
-            for post in data:
-                table += '<tr>'+'<td>'+post[0]+'</td><td>'+post[1]+'</td></tr>'
     except Exception as e:
         print(e)
         table = "<p>Post could not be submitted.</p>"
