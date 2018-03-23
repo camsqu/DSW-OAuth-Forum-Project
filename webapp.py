@@ -44,10 +44,8 @@ def post():
     db = client[os.environ["MONGO_DBNAME"]]
     collection = db['forum'] #put the name of your collection in the quote
     ##################################################################################################
-    try:
-        collection.insert_one({"post":[session['user_data']['login'], request.form['message']})
-    except Exception as e: 
-        print(e)
+    collection.insert_one({"post":[session['user_data']['login'], request.form['message']})
+   
     return render_template('home.html', past_posts=posts_to_html())
 
 
