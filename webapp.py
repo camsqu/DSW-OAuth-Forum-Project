@@ -45,10 +45,7 @@ def post():
     collection = db['forum'] #put the name of your collection in the quote
     ##################################################################################################
     try:
-        for i in data:
-            #
-            data = [{"_id" : i,  [session['user_data']['login']: request.form['message']}]
-            # DO WORK ABOVE.
+        collection.insert_one({"post":[session['user_data']['login'], request.form['message']})
     except Exception as e: 
         print(e)
     return render_template('home.html', past_posts=posts_to_html())
@@ -65,6 +62,7 @@ def posts_to_html():
     db = client[os.environ["MONGO_DBNAME"]]
     collection = db['forum'] #put the name of your collection in the quote
     ##################################################################################################
+    posti = ""
     table = "<table id='postTable'><tr><b><td>Username </td><td>Post</td></b></tr>"
     try:
         with open(file,'r+') as f:
